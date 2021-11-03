@@ -1,0 +1,72 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+
+```{r setup, echo=FALSE, include=FALSE, eval=TRUE, autodep=TRUE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+library(tidyverse)
+library(gt)
+```
+
+## Ecological Model of Binary Interaction with Dominant Features (EMBIID)  
+  
+We have previously reported the utility of interaction models to account for the effect of microbial interactions on infection risk. For example, _Staphylococcus aureus_ interactions with _Corynebacterium_ species in the upper respiratory tract appear to alter the risk of lower respiratory tract infection. Likewise, _Clostridioides difficile_ interactions with _Ruminococcus_ and _Lachnospira_ species in the gastrointestinal tract can influence the risk of _C. difficile_ infection.    
+  
+Here we report the utility of our binary interaction model to understand team lineup selection to optimize pairings with a selected "keystone" player. Unlike dominant features of microbial communities, the selection of one keystone player over another potential keystone is often arbitrary, or related to factors outside of athletic performance. But we observe that keystone player selection is common throughout professional sports.     
+  
+  
+## Informative Observations    
+  
+We take as an informative observation each minute of playing time shared with the selected keystone player. For optimal performance, and to allow for random effects that could account for opponent-specific or situation-specific (e.g., fourth-quarter) differences, models would be fit to real, minute-level data. For demonstration purposes, we have imputed minute-level lineup data from aggregate lineup data that is publicly available at [nba.com](https://www.nba.com/stats/lineups/advanced/).  
+  
+  
+## Prior Knowledge re: Pairings with Selected Keystone Players    
+  
+During the course of a season, not all roster members are paired with the selected keystone player. Below we illustrate this with tables describing duration of paired time on the floor across teammates of Joel Embiid and Steph Curry during the NBA's 2020-2021 season:  
+  
+<div align="center">  
+```{r phl20_minutes, eval=TRUE, autodep=TRUE, fig.align='center', out.width='90%'}
+phl20_minutes <- read_rds("./tabs/phl20_minutes.rds")
+phl20_minutes
+```
+<br>
+```{r gsw20_minutes, eval=TRUE, autodep=TRUE, fig.align='center', out.width='90%'}
+gsw20_minutes <- read_rds("./tabs/gsw20_minutes.rds")
+gsw20_minutes
+```
+</div>  
+  
+The absence of paired minutes likely reflects prior knowledge regarding the efficacy of pairing. In our demonstration examples, we have not taken differences in prior probability of successful pairing into account, but the EMBIID model structure permits this prior knowledge to be incorporated.  
+  
+  
+## Interaction Model Likelihood  
+  
+The interaction model can be specified using a variety of outcome variables, including continuous and binary variables. Here we demonstrate the model using lineup net rating (offensive rating - defensive rating) data.  
+  
+  
+## Model Parameters    
+  
+The EMBIID model permits examination of two parameters for each player pairing, each on the scale of the chosen outcome variable (e.g., continuous net rating, shooting percentage, etc). The first parameter is the interaction term between a roster player and the keystone player. This parameter can be interpreted as the players' 'fit' -- the expected effect of their pairing, controlled for the expected effects of their individual performances. The second parameter is the total effect of the pairing. This accounts for both the fit term and the paired players' individual effect. This is important to examine because a positive fit can have a negative total effect if the paired player is, individually, a detriment to team performance. Below we demonstrate the model output using pairings from the NBA's 2020-2021 season:  
+  
+
+```{r fig_phl, eval=TRUE, autodep=TRUE, fig.align='center', out.width='90%'}
+knitr::include_graphics(path = "./figs/p_phl20.svg")
+```
+<br>
+```{r fig_gsw, eval=TRUE, autodep=TRUE, fig.align='center', out.width='90%'}
+knitr::include_graphics(path = "./figs/p_gsw20.svg")
+```
+  
+  
+## Model Parameters    
+  
+Just as microbial community models can be better understood by examining interactions in the light of community member features, so too can the EMBIID model output be better understood by mapping the parameters onto paired player features. 
+  
+  
+  
+  
+  
+
