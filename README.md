@@ -190,8 +190,10 @@ Embiid and Steph Curry during the NBA’s 2020-2021 season:
 The absence of paired minutes likely reflects prior knowledge regarding
 the efficacy of pairing. In our demonstration examples, we have not
 taken differences in prior probability of successful pairing into
-account, but the EMBIID model structure permits this prior knowledge to
-be incorporated.
+account. The number of paired minutes only impacts the posterior
+certainty (e.g., 95% posterior credible interval) of the observed
+effects. But the EMBIID model structure does permit this prior knowledge
+to be incorporated.
 
 ## Interaction Model Likelihood
 
