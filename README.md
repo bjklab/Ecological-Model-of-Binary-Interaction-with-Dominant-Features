@@ -221,9 +221,12 @@ using pairings from the NBA’s 2020-2021 season:
 <br>
 <img src="./figs/p_gsw20.svg" width="90%" style="display: block; margin: auto;" />
 
-## Model Parameters
+## Integrating EMBIID Model Parameters with Player Feature Data
 
 Just as microbial community models can be better understood by examining
 interactions in the light of community member features, so too can the
 EMBIID model output be better understood by mapping the parameters onto
-paired player features.
+paired player features. The model parameters directly reflect benefits
+of pairing invidual players. By integrating player feature data, the
+model parameters can inform roster formation (e.g., free agent
+contracts).

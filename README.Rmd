@@ -62,9 +62,9 @@ knitr::include_graphics(path = "./figs/p_gsw20.svg")
 ```
   
   
-## Model Parameters    
+## Integrating EMBIID Model Parameters with Player Feature Data    
   
-Just as microbial community models can be better understood by examining interactions in the light of community member features, so too can the EMBIID model output be better understood by mapping the parameters onto paired player features. 
+Just as microbial community models can be better understood by examining interactions in the light of community member features, so too can the EMBIID model output be better understood by mapping the parameters onto paired player features. The model parameters directly reflect benefits of pairing invidual players. By integrating player feature data, the model parameters can inform roster formation (e.g., free agent contracts).   
   
   
   
