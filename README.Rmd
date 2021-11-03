@@ -45,7 +45,7 @@ The absence of paired minutes likely reflects prior knowledge regarding the effi
   
 ## Interaction Model Likelihood  
   
-The interaction model can be specified using a variety of outcome variables, including continuous and binary variables. Here we demonstrate the model using lineup net rating (offensive rating - defensive rating) data.  
+The interaction model can be specified using a variety of outcome variables, including continuous and binary variables. Here we demonstrate the model using lineup net rating (offensive rating - defensive rating) as the outcome.    
   
   
 ## Model Parameters    

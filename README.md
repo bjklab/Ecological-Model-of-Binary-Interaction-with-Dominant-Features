@@ -200,7 +200,7 @@ to be incorporated.
 The interaction model can be specified using a variety of outcome
 variables, including continuous and binary variables. Here we
 demonstrate the model using lineup net rating (offensive rating -
-defensive rating) data.
+defensive rating) as the outcome.
 
 ## Model Parameters
 
