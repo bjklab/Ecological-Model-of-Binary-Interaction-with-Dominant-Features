@@ -119,7 +119,7 @@ prep_dat_embiid <- function(dominant_feature = "j_embiid", outcome_var = "netrtg
     identity() -> dat_simple
   # narrow to only those observed with the dominant feature
   co_occur_tib %>%
-    filter(minutes_with_dominant == 0) %>%
+    filter(minutes_with_keystone == 0) %>%
     pull(player) %>%
     identity() -> zero_with_dominant
   dat_simple %>%
@@ -321,4 +321,10 @@ plot_tib %>%
   map2(.x = .$plot_name, .y = .$plot, .f = ~ ggsave(plot = .y, filename = glue::glue("./figs/{.x}.png"), height = 6, width = 8, units = "in", dpi = 600))
 
 
+
+#' #################################
+#' posterior model contrast: multiple players specified
+#' #################################
+
+gsw20_net
 
