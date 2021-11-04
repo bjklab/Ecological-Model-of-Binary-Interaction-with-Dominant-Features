@@ -326,5 +326,62 @@ plot_tib %>%
 #' posterior model contrast: multiple players specified
 #' #################################
 
-gsw20_net
+gsw20_mod %>%
+  pluck("data") %>%
+  as_tibble() %>%
+  select(-netrtg) %>%
+  slice(1:2) %>%
+  mutate_all(.funs = ~ c(TRUE, FALSE)) %>%
+  # include only time with dominant feature & specified lineup components
+  mutate_at(.vars = c("s_curry", "d_green", "k_bazemore", "a_wiggins"), .funs = ~ c(TRUE, TRUE)) %>%
+  mutate_at(.vars = c("k_oubre_jr", "j_toscano_anderson", "b_wanamaker", "d_lee", "e_paschall", "m_mulder", "j_poole", "n_mannion", "g_payton_ii", "m_chriss"), .funs = ~ c(FALSE, FALSE)) %>%
+  expand(!!! rlang::syms(names(.))) %>%
+  add_epred_draws(newdata = ., object = gsw20_mod, ndraws = 1000) %>%
+  ungroup() %>%
+  select(-.row, -.draw, -.chain, -.iteration) %>%
+  select(.epred, k_looney, j_wiseman) %>%
+  # # contrast players on/off court with dominant feature
+  pivot_longer(cols = c(-.epred), names_to = "player", values_to = "on_court") %>%
+  pivot_wider(id_cols = player, names_from = on_court, values_from = .epred, names_prefix = "on_court_") %>%
+  mutate(on_off_contrast = map2(.x = on_court_TRUE, .y = on_court_FALSE, .f = ~ .x - .y)) %>%
+  select(player, on_off_contrast) %>%
+  unnest(cols = on_off_contrast) %>%
+  mutate(outcome = "netrtg") %>%
+  identity() -> looney_wiseman_neteffect
+looney_wiseman_neteffect
 
+
+looney_wiseman_neteffect %>%
+  select(player, on_off_contrast) %>%
+  group_by(player) %>%
+  tidybayes::median_qi(.width = 0.95, .simple_names = FALSE) %>%
+  ungroup() %>%
+  mutate(player = stringr::str_to_title(string = gsub("_"," ",player)),
+         player = gsub("Iii","III",player),
+         player = gsub("Ii","II",player),
+         player = forcats::fct_reorder(.f = factor(player), .x = on_off_contrast)) %>%
+  ggplot(data = .) +
+  geom_vline(xintercept = 0, linetype = 2, color = "darkgrey") +
+  geom_linerange(aes(y = player, xmin = on_off_contrast.lower, xmax = on_off_contrast.upper), color = "#BC3C29FF", position = position_nudge(y = 0)) +
+  geom_point(aes(y = player, x = on_off_contrast), color = "#BC3C29FF", position = position_nudge(y = 0)) + #shape = 21
+  theme_bw() +
+  theme(plot.title.position = "plot",
+        plot.title = ggtext::element_markdown(),
+        plot.subtitle = ggtext::element_markdown(),
+        axis.text.x = ggtext::element_markdown(color = "black"),
+        axis.title.x = ggtext::element_markdown(color = "black"),
+        axis.text.y = ggtext::element_markdown(color = "black"),
+        axis.title.y = ggtext::element_markdown(color = "black")
+  ) +
+  labs(title = "Ecological Model of Binary Interaction with Dominant Features",
+       subtitle = glue::glue("<span style='color:#BC3C29FF'>Total Effect</span> of Addition to Lineup with S. Curry, D. Green, K. Bazemore, A. Wiggins (2020-2021 Season)"),
+       x = glue::glue("Expected Change in Lineup's Net Rating<br>(posterior median and 95% credible interval)"),
+       y = "") -> p_looney_wiseman
+p_looney_wiseman
+
+p_looney_wiseman %>%
+  ggsave(plot = ., filename = "./figs/p_looney_wiseman_20.pdf", height = 3, width = 8, units = "in")
+p_looney_wiseman %>%
+  ggsave(plot = ., filename = "./figs/p_looney_wiseman_20.svg", height = 3, width = 8, units = "in")
+p_looney_wiseman %>%
+  ggsave(plot = ., filename = "./figs/p_looney_wiseman_20.png", height = 3, width = 8, units = "in", dpi = 600)

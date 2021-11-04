@@ -52,7 +52,7 @@ The interaction model can be specified using a variety of outcome variables, inc
   
 ## Model Parameters    
   
-The EMBIID model permits examination of two parameters for each player pairing, each on the scale of the chosen outcome variable. The first parameter is the interaction term between a roster player and the keystone player. This parameter can be interpreted as the players' 'fit' -- the expected effect of their pairing, controlled for the expected effects of the players' individual performances. The second parameter is the total effect of the pairing. This accounts for both the fit term and the paired player's individual effect. A positive fit can have a negative total effect if the paired player is, individually, a detriment to team performance. Below we demonstrate the model output using pairings from the NBA's 2020-2021 season:  
+The EMBIID model permits examination of two parameters for each player pairing, each on the scale of the chosen outcome variable. The first parameter is the interaction term between a roster player and the keystone player. This parameter can be interpreted as the player's 'fit' -- the expected effect of their pairing, controlled for the expected effects of the players' individual performances. The second parameter is the total effect of the pairing. This accounts for both the fit term and the paired player's individual effect. A positive fit can have a negative total effect if the paired player is, individually, a detriment to team performance. Below we demonstrate the model output using pairings from the NBA's 2020-2021 season:  
   
 
 ```{r fig_phl, eval=TRUE, autodep=TRUE, fig.align='center', out.width='90%'}
@@ -63,16 +63,18 @@ The EMBIID model permits examination of two parameters for each player pairing, 
 knitr::include_graphics(path = "./figs/p_gsw20.svg")
 ```
   
-## Comparing Players in the Context of a Full Lineups        
+## Comparing Players in the Context of a Full Lineup          
   
 The posterior produced by the EMBIID model allows examination of the conditional effects of multiple players paired with the keystone player. For example, comparisons can be made between player options at a specific position, conditional on a set of players filling the other positions:  
 
-
+```{r fig_full_lineup, eval=TRUE, autodep=TRUE, fig.align='center', out.width='90%'}
+knitr::include_graphics(path = "./figs/p_looney_wiseman_20.svg")
+```
   
   
 ## Integrating EMBIID Model Parameters with Player Feature Data    
   
-Just as microbial community models can be better understood by examining interactions in the light of community member features, so too can the EMBIID model output be better understood by mapping the parameters onto paired player features. The model parameters directly reflect benefits of pairing invidual players. By integrating player feature data, the model parameters can inform roster formation (e.g., free agent contracts).   
+Just as microbial community models can be better understood by examining interactions in the light of community member features, so too can the EMBIID model output be better understood by mapping the parameters onto performance features of the interrogated players. The model parameters directly reflect benefits of pairing individual players. By integrating player feature data, patterns of successful pairings can be appreciated to inform roster formation.   
   
   
   

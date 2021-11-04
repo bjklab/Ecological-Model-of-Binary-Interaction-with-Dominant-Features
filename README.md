@@ -135,7 +135,7 @@ defensive rating) as the outcome.
 The EMBIID model permits examination of two parameters for each player
 pairing, each on the scale of the chosen outcome variable. The first
 parameter is the interaction term between a roster player and the
-keystone player. This parameter can be interpreted as the players’ ‘fit’
+keystone player. This parameter can be interpreted as the player’s ‘fit’
 – the expected effect of their pairing, controlled for the expected
 effects of the players’ individual performances. The second parameter is
 the total effect of the pairing. This accounts for both the fit term and
@@ -147,7 +147,7 @@ pairings from the NBA’s 2020-2021 season:
 <!-- <br> -->
 <img src="./figs/p_gsw20.svg" width="90%" style="display: block; margin: auto;" />
 
-## Comparing Players in the Context of a Full Lineups
+## Comparing Players in the Context of a Full Lineup
 
 The posterior produced by the EMBIID model allows examination of the
 conditional effects of multiple players paired with the keystone player.
@@ -155,12 +155,14 @@ For example, comparisons can be made between player options at a
 specific position, conditional on a set of players filling the other
 positions:
 
+<img src="./figs/p_looney_wiseman_20.svg" width="90%" style="display: block; margin: auto;" />
+
 ## Integrating EMBIID Model Parameters with Player Feature Data
 
 Just as microbial community models can be better understood by examining
 interactions in the light of community member features, so too can the
 EMBIID model output be better understood by mapping the parameters onto
-paired player features. The model parameters directly reflect benefits
-of pairing invidual players. By integrating player feature data, the
-model parameters can inform roster formation (e.g., free agent
-contracts).
+performance features of the interrogated players. The model parameters
+directly reflect benefits of pairing individual players. By integrating
+player feature data, patterns of successful pairings can be appreciated
+to inform roster formation.
