@@ -16,7 +16,7 @@ infection.
 
 Interactions can exert large effects in other settings as well. Here we
 report the application of our binary interaction model to understand how
-pairing teammates with a selected “keystone” player impact lineup
+pairing teammates with a selected “keystone” player impacts lineup
 performance. Unlike dominant features of microbial communities, the
 designation of a keystone player (given multiple players with similar
 performance) may be arbitrary, or related to factors outside of athletic
@@ -33,10 +33,10 @@ situation-specific (e.g., fourth-quarter) differences, models would be
 fit to real, minute-level data. For demonstration purposes, we have
 imputed minute-level lineup data from aggregate lineup data that is
 publicly available at
-[nba.com](https://www.nba.com/stats/lineups/advanced/). No situational
-data is included in the example, but the EMBIID model structure can
-accomodate situational factors (e.g., time of game, coaching scheme) as
-fixed or random effects.
+[nba.com](https://www.nba.com/stats/lineups/advanced/). No other data is
+included in the example, but the EMBIID model structure can accommodate
+environmental factors (e.g., time of game, coaching scheme) as fixed or
+random effects.
 
 ## Prior Knowledge re: Pairings with Selected Keystone Players
 
@@ -114,12 +114,14 @@ Steph Curry during the NBA’s 2020-2021 season:
 </table>
 
 The absence of paired minutes likely reflects prior knowledge regarding
-the expected efficacy of pairing. In our demonstration example, we have
-not taken differences in prior probability of successful pairing into
-account. The number of paired minutes only impacts the posterior
-certainty (e.g., 95% posterior credible interval) of the observed
-effects. But the EMBIID model structure permits this prior knowledge to
-be incorporated.
+the expected efficacy of pairing. The Bayesian structure of the EMBIID
+model does permit such prior knowledge, drawn from expert opinion or
+prior observations, to be incorporated. But in the demonstration example
+below, we have not taken differences in prior probability of successful
+pairing into account. The model assumes an equal prior probability of
+success for each pairing, and the number of paired minutes only impacts
+the span of posterior certainty (posterior credible interval) of the
+observed effects.
 
 ## Outcome Variables
 
@@ -131,27 +133,27 @@ defensive rating) as the outcome.
 ## Model Parameters
 
 The EMBIID model permits examination of two parameters for each player
-pairing, each on the scale of the chosen outcome variable (e.g., net
-rating, true shooting percentage, etc). The first parameter is the
-interaction term between a roster player and the keystone player. This
-parameter can be interpreted as the players’ ‘fit’ – the expected effect
-of their pairing, controlled for the expected effects of the players’
-individual performances. The second parameter is the total effect of the
-pairing. This accounts for both the fit term and the paired player’s
-individual effect. A positive fit can have a negative total effect if
-the paired player is, individually, a detriment to team performance.
-Below we demonstrate the model output using pairings from the NBA’s
-2020-2021 season:
+pairing, each on the scale of the chosen outcome variable. The first
+parameter is the interaction term between a roster player and the
+keystone player. This parameter can be interpreted as the players’ ‘fit’
+– the expected effect of their pairing, controlled for the expected
+effects of the players’ individual performances. The second parameter is
+the total effect of the pairing. This accounts for both the fit term and
+the paired player’s individual effect. A positive fit can have a
+negative total effect if the paired player is, individually, a detriment
+to team performance. Below we demonstrate the model output using
+pairings from the NBA’s 2020-2021 season:
 
 <!-- <br> -->
 <img src="./figs/p_gsw20.svg" width="90%" style="display: block; margin: auto;" />
 
-## Specifying Lineup Combinations
+## Comparing Players in the Context of a Full Lineups
 
-The EMBIID model also permits examination of the conditional effects of
-multiple players paired with the keystone player. For example,
-comparisons can be made between player options at a specific position,
-conditional on a set of players filling the other positions:
+The posterior produced by the EMBIID model allows examination of the
+conditional effects of multiple players paired with the keystone player.
+For example, comparisons can be made between player options at a
+specific position, conditional on a set of players filling the other
+positions:
 
 ## Integrating EMBIID Model Parameters with Player Feature Data
 
