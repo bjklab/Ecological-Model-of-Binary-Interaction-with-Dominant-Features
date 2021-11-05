@@ -5,17 +5,16 @@
 
 ## Motivation for Interaction Model
 
-We have previously reported the utility of interaction models to account
-for the effect of microbial interactions on infection risk. For example,
-*Staphylococcus aureus* interactions with *Corynebacterium* species in
-the upper respiratory tract appear to alter the risk of lower
-respiratory tract infection. Likewise, *Clostridioides difficile*
-interactions with *Ruminococcus* and *Lachnospira* species in the
-gastrointestinal tract can influence the risk of *C. difficile*
-infection.
+Interaction models are useful to quantify the effect of microbial
+interactions on infection risk. For example, *Staphylococcus aureus*
+interactions with *Corynebacterium* species in the upper respiratory
+tract appear to alter the risk of lower respiratory tract infection.
+Likewise, *Clostridioides difficile* interactions with *Ruminococcus*
+and *Lachnospira* species in the gastrointestinal tract can influence
+the risk of *C. difficile* infection.
 
 Interactions can exert large effects in other settings as well. Here we
-report the application of our binary interaction model to understand how
+describe the application of a binary interaction model to understand how
 pairing teammates with a selected “keystone” player impacts lineup
 performance. Unlike dominant features of microbial communities, the
 designation of a keystone player (given multiple players with similar
@@ -26,9 +25,9 @@ dominant feature can be useful in this setting.
 
 ## Informative Observations
 
-We take as an informative observation each minute of playing time shared
-with the selected keystone player. For optimal performance, and to allow
-for random effects that could account for opponent-specific or
+Each minute of playing time shared with the selected keystone player is
+taken as an informative observation. For optimal performance, and to
+allow for random effects that could account for opponent-specific or
 situation-specific (e.g., fourth-quarter) differences, models would be
 fit to real, minute-level data. For demonstration purposes, we have
 imputed minute-level lineup data from aggregate lineup data that is
