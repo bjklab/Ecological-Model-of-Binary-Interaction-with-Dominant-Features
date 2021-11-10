@@ -1,0 +1,233 @@
+---
+#title: "Ecological Model of Binary Interaction with Dominant Features (EMBIID) with Applications to Lineup Selection"
+#author: "Brendan J. Kelly, MD, MS"
+bibliography: bib/references.bib
+csl: csl/nlm_with_pmcid.csl
+output: html_document
+css: style_helvetica_double.css
+---
+
+```{r setup, echo=FALSE, eval=TRUE, include=FALSE, autodep=TRUE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+library(tidyverse)
+library(tidybayes)
+library(glue)
+library(gt)
+
+```
+  
+  
+## Title  
+Ecological Model of Binary Interaction with Dominant Features (EMBIID) with Applications to Lineup Selection  
+  
+## Abbreviated Title  
+Binary Interaction Model    
+   
+## Authors  
+Brendan J. Kelly, MD, MS (1,2,3)
+  
+## Affiliations  
+1 - Division of Infectious Diseases, Department of Medicine;   
+2 - Department of Biostatistics, Epidemiology, and Informatics;  
+3 - Center for Clinical Epidemiology and Biostatistics, Perelman School of Medicine, University of Pennsylvania, Philadelphia, PA    
+  
+## Corresponding Author Contact  
+Brendan J. Kelly, MD, MS - brendank@pennmedicine.upenn.edu  
+  
+## Authors' Contributions  
+
+## Data Availability  
+Data, analysis scripts, and model code are available at github.com/bjklab.    
+  
+## Keywords  
+basketball, Bayesian models, lineup selection
+
+  
+## Acknowledgements:  
+.   
+  
+## Disclosures:  
+The authors report no conflicts of interest.    
+  
+## Word Count:    
+?????       
+  
+  
+-----    
+  
+\newpage     
+  
+## Manuscript  
+  
+### Abstract  
+  
+* __Background__: .
+  
+* __Methods__: . 
+  
+* __Results__: .  
+    
+* __Conclusions__: .   
+   
+ <!-- -----  
+\newpage  
+  
+  
+### Importance  
+  
+If required by journal. -->   
+  
+  
+-----    
+  
+\newpage    
+  
+  
+### Introduction:    
+  
+Interaction models are useful to quantify the effect of microbial interactions on infection risk. For example, _Staphylococcus aureus_ interactions with _Corynebacterium_ species in the upper respiratory tract appear to alter the risk of lower respiratory tract infection. Likewise, _Clostridioides difficile_ interactions with _Ruminococcus_ and _Lachnospira_ species in the gastrointestinal tract can influence the risk of _C. difficile_ infection.    
+  
+Interactions can exert large effects in other settings as well. Here we describe the application of a binary interaction model to understand how pairing teammates with a selected "keystone" player impacts lineup performance. Unlike dominant features of microbial communities, the designation of a keystone player (given multiple players with similar performance) may be arbitrary, or related to factors outside of athletic performance. But keystone player selection is common throughout professional sports, and our model of binary interactions with a dominant feature can be useful in this setting.  
+  
+  
+-----    
+  
+\newpage  
+
+  
+  
+### Materials and Methods:  
+  
+* __Study Design, Setting, and Population__: .  
+   
+* __Causal Model__: .
+   
+* __Specimen Collection and SARS-CoV-2 RT-PCR__: .  
+   
+* __Distance Data Collection__: .
+  
+* __Definition of Exposures and Outcomes__: .
+  
+* __Statistical Methods__: Data were organized using R statistical software version 3.6.1 [@R_Core_Team2018-xo], and plots generated using the “ggplot2” package [@Wickham2016-eh].... Models were fit using Stan Hamiltonian Monte Carlo (HMC) version 2.21, via the "brms" package with default, weakly-informative priors [@Carpenter2017-ec; @Burkner2017-yr]. Prior predictive modeling was performed, and models were fit with 4 chains of 1000 iterations, confirmed with HMC diagnostics (no divergent iterations, Rhat statistic < 1.1 for all parameters, and E-BFMI > 0.2) [@McElreath2016-sf; @Gabry2019-le; @Gelman2020-sd]. We examined parameter distributions at 50%, 80%, and 95% posterior credible intervals to understand the relationship between exposure and outcome variables.  
+  
+* __Power and Sample Size__: .    
+  
+* __Availability of Data__: Data, analysis scripts, and model code are available at https://github.com/bjklab.   
+  
+-----    
+  
+\newpage  
+
+  
+  
+### Results:  
+  
+* __Informative Observations__: Each minute of playing time shared with the selected keystone player is taken as an informative observation. For optimal performance, and to allow for random effects that could account for opponent-specific or situation-specific (e.g., fourth-quarter) differences, models would be fit to real, minute-level data. For demonstration purposes, we have imputed minute-level lineup data from aggregate lineup data that is publicly available at [nba.com](https://www.nba.com/stats/lineups/advanced/). No other data is included in the example, but the EMBIID model structure can accommodate environmental factors (e.g., time of game, coaching scheme) as fixed or random effects.           
+  
+* __Prior Knowledge re: Pairings with Selected Keystone Players__: During the course of a season, not all roster members are paired with the selected keystone player. Below we illustrate this with tables describing duration of paired time on the floor across teammates of Steph Curry during the NBA's 2020-2021 season: The absence of paired minutes likely reflects prior knowledge regarding the expected efficacy of pairing. The Bayesian structure of the EMBIID model does permit such prior knowledge, drawn from expert opinion or prior observations, to be incorporated. But in the demonstration example below, we have not taken differences in prior probability of successful pairing into account. The model assumes an equal prior probability of success for each pairing, and the number of paired minutes only impacts the span of posterior certainty (posterior credible interval) of the observed effects.         
+  
+* __Outcome Variables__: The interaction model can be specified using a variety of outcome variables, including continuous and binary variables. Here we demonstrate the model using lineup net rating (offensive rating - defensive rating) as the outcome.             
+  
+* __Model Parameters__: The EMBIID model permits examination of two parameters for each player pairing, each on the scale of the chosen outcome variable. The first parameter is the interaction term between a roster player and the keystone player. This parameter can be interpreted as the player's 'fit' -- the expected effect of their pairing, controlled for the expected effects of the players' individual performances. The second parameter is the total effect of the pairing. This accounts for both the fit term and the paired player's individual effect. A positive fit can have a negative total effect if the paired player is, individually, a detriment to team performance. Below we demonstrate the model output using pairings from the NBA's 2020-2021 season ().        
+  
+* __Comparing Players in the Context of a Full Lineup__: The posterior produced by the EMBIID model allows examination of the conditional effects of multiple players paired with the keystone player. For example, comparisons can be made between player options at a specific position, conditional on a set of players filling the other positions ().  
+  
+* __Integrating EMBIID Model Parameters with Player Feature Data__: Just as microbial community models can be better understood by examining interactions in the light of community member features, so too can the EMBIID model output be better understood by mapping the parameters onto performance features of the interrogated players. The model parameters directly reflect benefits of pairing individual players. By integrating player feature data, patterns of successful pairings can be appreciated to inform roster formation.  
+  
+  
+-----    
+  
+\newpage  
+
+  
+  
+### Discussion:  
+  
+We sought to define the .  
+  
+We found .  
+  
+Our study design and hypotheses .  
+  
+Our study has several limitations. .  
+  
+In conclusion, .  
+  
+  
+-----  
+  
+\newpage  
+
+  
+  
+### Tables:  
+  
+#### Table 1:   
+  
+```{r table1, eval=TRUE, autodep=TRUE, error=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
+
+```
+  
+  
+__Table 1: .__ .  
+  
+  
+
+  
+-----    
+  
+\newpage  
+
+  
+### Figures:  
+  
+#### Figure 1:  
+  
+  
+```{r fig1, eval=TRUE, autodep=TRUE, fig.align='center', out.width='90%'}
+knitr::include_graphics(path = "./figs/p_gsw20.svg")
+```
+  
+  
+__Figure 1: .__ .      
+      
+  
+  
+-----    
+  
+\newpage  
+
+  
+#### Figure 2:  
+  
+```{r fig2, eval=TRUE, autodep=TRUE, fig.align='center', out.width='90%'}
+knitr::include_graphics(path = "./figs/p_looney_wiseman_20.svg")  
+```
+  
+  
+__Figure 2: .__ .               
+  
+  
+-----    
+  
+\newpage  
+  
+  
+## References  
+  
+<div id="refs"></div>
+  
+  
+
+  
+-----  
+  
+\newpage  
+
+
+  
+## R Session Information  
+  
+```{r session_info, eval=TRUE, autodep=TRUE}
+sessionInfo()
+```
